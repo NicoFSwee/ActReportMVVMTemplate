@@ -1,0 +1,41 @@
+﻿<Window x:Class="ActReport.UI.MainWindow"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:local="clr-namespace:ActReport.UI"
+ mc:Ignorable="d"
+ Title="ActivityReport" Height="350" Width="525">
+    <!--
+DataContext wird in CodeBehind gesetzt (um Laden der DB im Designmode zu unterbinden!)
+ <Window.DataContext>
+ <vm:EmployeeViewModel></vm:EmployeeViewModel>
+ </Window.DataContext>
+ -->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Button Height="30" Command="{Binding CmdSaveChanges}">Änderung speichern</Button>
+        <UniformGrid Grid.Row="1" Rows="3" Columns="2">
+            <TextBlock>Vorname:</TextBlock>
+            <TextBox Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBlock>Nachname:</TextBlock>
+            <TextBox Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBlock>Filtern nach Familienname:</TextBlock>
+            <TextBox Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+        </UniformGrid>
+        <ListView SelectedItem="{Binding SelectedEmployee}" Grid.Row="2" ItemsSource="{Binding Employees}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="120" Header="Vorname" DisplayMemberBinding="{Binding FirstName}"></GridViewColumn>
+                    <GridViewColumn Width="120" Header="Nachname" DisplayMemberBinding="{Binding LastName}"></GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Grid.Row="3" Height="30" Command="{Binding CmdAddEntries}">Eintrag hinzufügen</Button>
+    </Grid>
+</Window>
