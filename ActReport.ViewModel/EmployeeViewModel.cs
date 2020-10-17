@@ -69,7 +69,7 @@ namespace ActReport.ViewModel
                             LoadEmployees();
                         },
                         canExecute: _ => !string.IsNullOrEmpty(LastName) && !string.IsNullOrEmpty(FirstName) &&
-                                        LastName.Length >= 3 && FirstName.Length >= 3);
+                                        LastName.Length >= 3 && FirstName.Length >= 3 && _selectedEmployee == null);
                 }
 
                 return _cmdAddEntries;
